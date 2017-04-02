@@ -44,7 +44,9 @@ namespace PlaceTimelapse
                 DirectoryInfo eventImageDirectory = new DirectoryInfo("input");
                 ImagePlaceEventSource eventSourceB = new ImagePlaceEventSource(eventImageDirectory, new DefaultColorPalette(), logger);
 
-                CompositePlaceEventSource eventSource = new CompositePlaceEventSource(eventSourceA, eventSourceB);
+                CompositePlaceEventSource eventSourceAB = new CompositePlaceEventSource(eventSourceA, eventSourceB);
+
+                RedundantFilteringPlaceEventSource eventSource = new RedundantFilteringPlaceEventSource(eventSourceAB, 1001, 1001);
 
                 TimeSpan cycle = TimeSpan.FromMinutes(0.5);
                 TimelapseManager manager = new TimelapseManager(eventSource, renderer, saver, cycle, logger);
