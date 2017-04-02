@@ -32,8 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.4.1-dev-00805\lib\net45\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.ColoredConsole, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.ColoredConsole.2.1.0-dev-00713\lib\net45\Serilog.Sinks.ColoredConsole.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,11 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorPalettes\DefaultColorPalette.cs" />
+    <Compile Include="IColorPalette.cs" />
+    <Compile Include="IPlaceEventSource.cs" />
+    <Compile Include="IPlaceMapRenderer.cs" />
+    <Compile Include="ISnapshotSaver.cs" />
+    <Compile Include="PlaceEvent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\DefaultPlaceMapRenderer.cs" />
+    <Compile Include="Renderers\DefaultPlaceMapRendererOptions.cs" />
+    <Compile Include="Savers\PngSnapshotSaver.cs" />
+    <Compile Include="Sources\CsvPlaceEventSource.cs" />
+    <Compile Include="TimelapseManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
