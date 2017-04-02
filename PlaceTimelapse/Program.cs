@@ -41,14 +41,17 @@ namespace PlaceTimelapse
                 string csvPath = "export.csv";
                 CsvPlaceEventSource eventSourceA = new CsvPlaceEventSource(csvPath, logger);
 
-                DirectoryInfo eventImageDirectory = new DirectoryInfo("input");
-                ImagePlaceEventSource eventSourceB = new ImagePlaceEventSource(eventImageDirectory, new DefaultColorPalette(), logger);
+                DirectoryInfo eventImageDirectoryB = new DirectoryInfo("input");
+                ImagePlaceEventSource eventSourceB = new ImagePlaceEventSource(eventImageDirectoryB, new DefaultColorPalette(), logger);
 
-                CompositePlaceEventSource eventSourceAB = new CompositePlaceEventSource(eventSourceA, eventSourceB);
+                DirectoryInfo eventImageDirectoryC = new DirectoryInfo("input2");
+                ImagePlaceEventSource eventSourceC = new ImagePlaceEventSource(eventImageDirectoryC, new DefaultColorPalette(), logger);
 
-                RedundantFilteringPlaceEventSource eventSource = new RedundantFilteringPlaceEventSource(eventSourceAB, 1001, 1001);
+                CompositePlaceEventSource eventSourceABC = new CompositePlaceEventSource(eventSourceA, new CompositePlaceEventSource(eventSourceB, eventSourceC));
 
-                TimeSpan cycle = TimeSpan.FromMinutes(0.5);
+                RedundantFilteringPlaceEventSource eventSource = new RedundantFilteringPlaceEventSource(eventSourceABC, 1001, 1001);
+
+                TimeSpan cycle = TimeSpan.FromSeconds(5); 
                 TimelapseManager manager = new TimelapseManager(eventSource, renderer, saver, cycle, logger);
 
                 manager.CreateTimelapse();

@@ -47,7 +47,9 @@ namespace PlaceTimelapse.ColorPalettes
 
         public int GetColorId(Color color)
         {
-            return _idDict[color];
+            if(_idDict.ContainsKey(color))
+                return _idDict[color];
+            return 0;
         }
     }
 }

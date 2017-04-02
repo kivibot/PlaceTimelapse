@@ -30,14 +30,20 @@ namespace PlaceTimelapse
             _logger.Information("Creating a timelapse.");
 
             DateTime lastSnapshotDate = DateTime.MinValue;
-            
+            bool isFirstSnapshot = true;
+
             foreach (PlaceEvent placeEvent in _eventSource.GetEvents())
             {
-                if (lastSnapshotDate + _cycle < placeEvent.Date)
+                if (isFirstSnapshot)
                 {
                     CreateSnapshot();
-
+                    isFirstSnapshot = false;
                     lastSnapshotDate = placeEvent.Date;
+                }
+                else if (lastSnapshotDate + _cycle < placeEvent.Date)
+                {
+                    CreateSnapshot();
+                    lastSnapshotDate += _cycle;
                 }
 
                 _renderer.RenderEvent(placeEvent);
