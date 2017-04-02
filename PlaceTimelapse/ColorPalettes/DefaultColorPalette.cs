@@ -10,6 +10,7 @@ namespace PlaceTimelapse.ColorPalettes
     public class DefaultColorPalette : IColorPalette
     {
         private readonly Color[] _colors;
+        private readonly Dictionary<Color, int> _idDict;
 
         public DefaultColorPalette()
         {
@@ -32,11 +33,21 @@ namespace PlaceTimelapse.ColorPalettes
                 Color.FromArgb(207, 110, 228),
                 Color.FromArgb(130, 0, 128)
             };
+            _idDict = new Dictionary<Color, int>();
+            for(int i=0; i<_colors.Length; i++)
+            {
+                _idDict[_colors[i]] = i;
+            }
         }
 
         public Color GetColor(int colorId)
         {
             return _colors[colorId];
+        }
+
+        public int GetColorId(Color color)
+        {
+            return _idDict[color];
         }
     }
 }

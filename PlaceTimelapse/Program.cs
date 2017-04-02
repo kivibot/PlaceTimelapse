@@ -39,14 +39,19 @@ namespace PlaceTimelapse
                 ISnapshotSaver saver = new PngSnapshotSaver(directory, logger);
 
                 string csvPath = "export.csv";
-                CsvPlaceEventSource eventSource = new CsvPlaceEventSource(csvPath, logger);
+                CsvPlaceEventSource eventSourceA = new CsvPlaceEventSource(csvPath, logger);
+
+                DirectoryInfo eventImageDirectory = new DirectoryInfo("input");
+                ImagePlaceEventSource eventSourceB = new ImagePlaceEventSource(eventImageDirectory, new DefaultColorPalette(), logger);
+
+                CompositePlaceEventSource eventSource = new CompositePlaceEventSource(eventSourceA, eventSourceB);
 
                 TimeSpan cycle = TimeSpan.FromMinutes(0.5);
                 TimelapseManager manager = new TimelapseManager(eventSource, renderer, saver, cycle, logger);
 
                 manager.CreateTimelapse();
 
-                eventSource.Dispose();
+                eventSourceA.Dispose();
                 renderer.Dispose();
             }
             catch (Exception ex)

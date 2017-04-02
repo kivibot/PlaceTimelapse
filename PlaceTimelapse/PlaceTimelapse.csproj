@@ -60,7 +60,9 @@
     <Compile Include="Renderers\DefaultPlaceMapRenderer.cs" />
     <Compile Include="Renderers\DefaultPlaceMapRendererOptions.cs" />
     <Compile Include="Savers\PngSnapshotSaver.cs" />
+    <Compile Include="Sources\CompositePlaceEventSource.cs" />
     <Compile Include="Sources\CsvPlaceEventSource.cs" />
+    <Compile Include="Sources\ImagePlaceEventSource.cs" />
     <Compile Include="TimelapseManager.cs" />
   </ItemGroup>
   <ItemGroup>

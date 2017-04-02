@@ -10,5 +10,6 @@ namespace PlaceTimelapse
     public interface IColorPalette
     {
         Color GetColor(int colorId);
+        int GetColorId(Color color);
     }
 }
